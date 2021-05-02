@@ -8,9 +8,9 @@ public class CarNames {
 
 	List<String> carNames = new ArrayList<String>();
 	
-	CarNames(String inputNames) {
-		//carNames = parsingInputNames(inputNames);
-		//validateInputNames(carNames);
+	CarNames(String inputNames) {		
+		this.carNames = parsingInputNames(inputNames);
+		validateInputNames(carNames);
 	}
 	
 	public List<String> parsingInputNames(String inputNames) {
@@ -27,4 +27,7 @@ public class CarNames {
 		}		
 	}
 	
+	public List<String> getCarNamesList() {
+		return carNames;
+	}	
 }

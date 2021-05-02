@@ -66,4 +66,20 @@ class CarTest {
 		
 	}
 	
+	@DisplayName("문자열 리스트를 3개를 받아서, 자동차 객체 3개를 생성")
+	@Test	
+	public void test_make_carObjects() {
+		//Given
+		List<String> carNames = new ArrayList<String>();
+		carNames.add("chajs");
+		carNames.add("pobi");
+		carNames.add("june");
+		
+		//When-Then
+		for (String carName : carNames) {
+			Car car = new Car(carName);
+			assertThat(car.getCarName()).contains(carName);
+		}		
+	}
+	
 }
