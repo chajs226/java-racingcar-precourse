@@ -1,5 +1,6 @@
 package com.chajs226.racingcar;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,6 +12,7 @@ public class RacingCarGame {
 	
 	public RacingCarGame() {
 		scan = new Scanner(System.in);
+		cars = new ArrayList<Car>();
 	}
 	
 	@Override
@@ -21,7 +23,7 @@ public class RacingCarGame {
 	
 	public void startGame() {		
 		setPlayer();	
-		
+		setTryNumber();
 	}
 	
 	public void setPlayer() {
@@ -39,5 +41,12 @@ public class RacingCarGame {
 		}
 	}
 	
+	public void setTryNumber() {
+		int inputTryNumber;
+		System.out.println("시도할 횟수는 몇회인가요?");		
+		inputTryNumber = scan.nextInt();
+		//TODO: 숫자로 안들어온 값을 validate해야하는지, 말아야 하는지 (그냥 두면 exception이 나는데)
+
+	}	
 
 }
