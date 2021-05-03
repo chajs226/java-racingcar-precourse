@@ -1,6 +1,9 @@
 package com.chajs226.racingcar;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,10 +13,12 @@ public class RacingCarGame {
 	private TryNumber tryNumber;
 	private RandomNumber randomNumber;
 	private List<Car> playerCars;
+	private NumberOneCar numberOneCar;
 	
 	public RacingCarGame() {
 		scan = new Scanner(System.in);
 		playerCars = new ArrayList<Car>();
+		numberOneCar = new NumberOneCar();
 	}
 	
 	@Override
@@ -30,6 +35,7 @@ public class RacingCarGame {
 	 		setRandomNumber();
 			moveCars();		
 		}
+		showResult();
 	}
 	
 	public void setPlayer() {
@@ -52,7 +58,7 @@ public class RacingCarGame {
 		tryNumber = new TryNumber(scan.nextInt());
 	}	
 	
-	public void setRandomNumber() {
+	protected void setRandomNumber() {
 		for (Car car: playerCars) {			
 			randomNumber = new RandomNumber();
 			car.setRandomNumber(randomNumber);
@@ -70,6 +76,21 @@ public class RacingCarGame {
 	public void showMoving(Car car) {
 		System.out.print(car.getCarName() + " : ");
 		System.out.println(car.getMovedDistances());		
+	}
+	
+	public void showResult() {
+		Car numberOneCarforDistance = Collections.max(playerCars, Comparator.comparing(s -> s.getMovedDistances()));
+		String numberOneDistance = numberOneCarforDistance.getMovedDistances();
+		for (Car car: playerCars) {
+			findAllNumberOneCars(car, numberOneDistance);	
+		}
+		numberOneCar.printResult();
+	}
+	
+	private void findAllNumberOneCars(Car car, String NumberOneDistance) {		
+		if (car.getMovedDistances().equals(NumberOneDistance)) {
+			numberOneCar.add(car);			
+		}		
 	}
 
 }
