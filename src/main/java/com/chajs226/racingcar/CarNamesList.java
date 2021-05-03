@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CarNames {
+public class CarNamesList {
 
 	List<String> carNames = new ArrayList<String>();
 	
-	CarNames(String inputNames) {		
+	CarNamesList(String inputNames) {		
 		this.carNames = parsingInputNames(inputNames);
-		validateInputNames(carNames);
+		//validateInputNames(carNames);
 	}
 	
 	public List<String> parsingInputNames(String inputNames) {
@@ -20,12 +20,12 @@ public class CarNames {
 	}
 	
 	// 파싱된 이름 문자열이 5자 이상인지 검증
-	public void validateInputNames(List<String> inputNames) {
-		for (String inputName : inputNames) {
-			if (inputName.length() > 5)
-				throw new IllegalArgumentException("자동차 이름은 5자 이하만 가능합니다.");
-		}		
-	}
+//	public void validateInputNames(List<String> inputNames) {
+//		for (String inputName : inputNames) {
+//			if (inputName.length() > 5)
+//				throw new IllegalArgumentException("자동차 이름은 5자 이하만 가능합니다.");
+//		}		
+//	}
 	
 	public List<String> getCarNamesList() {
 		return carNames;

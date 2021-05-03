@@ -7,12 +7,13 @@ import java.util.Scanner;
 public class RacingCarGame {
 
 	Scanner scan;
-	private int random;
-	private List<Car> cars;
+	private TryNumber tryNumber;
+	private RandomNumber randomNumber;
+	private List<Car> playerCars;
 	
 	public RacingCarGame() {
 		scan = new Scanner(System.in);
-		cars = new ArrayList<Car>();
+		playerCars = new ArrayList<Car>();
 	}
 	
 	@Override
@@ -24,29 +25,51 @@ public class RacingCarGame {
 	public void startGame() {		
 		setPlayer();	
 		setTryNumber();
+		System.out.println("실행 결과");
+		for(int i=0; i<this.tryNumber.getTryNumber(); i++) {
+	 		setRandomNumber();
+			moveCars();		
+		}
 	}
 	
 	public void setPlayer() {
 		String inputCarNames = null;
 		System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");		
 		inputCarNames = scan.next();	
-		CarNames carNames = new CarNames(inputCarNames);
-		makeCars(carNames.getCarNamesList());
+		CarNamesList carNameList = new CarNamesList(inputCarNames);
+		makeCars(carNameList.getCarNamesList());
 	}
 	
 	public void makeCars(List<String> carNames) {
 		for (String carName : carNames) {
 			Car car = new Car(carName);
-			cars.add(car);
+			playerCars.add(car);
 		}
 	}
 	
 	public void setTryNumber() {
-		int inputTryNumber;
 		System.out.println("시도할 횟수는 몇회인가요?");		
-		inputTryNumber = scan.nextInt();
-		//TODO: 숫자로 안들어온 값을 validate해야하는지, 말아야 하는지 (그냥 두면 exception이 나는데)
-
+		tryNumber = new TryNumber(scan.nextInt());
 	}	
+	
+	public void setRandomNumber() {
+		for (Car car: playerCars) {			
+			randomNumber = new RandomNumber();
+			car.setRandomNumber(randomNumber);
+		}
+	}
+	
+	public void moveCars() {
+		for (Car car: playerCars) {
+			car.move();
+			showMoving(car);
+		}
+		System.out.println("");						
+	}
+	
+	public void showMoving(Car car) {
+		System.out.print(car.getCarName() + " : ");
+		System.out.println(car.getMovedDistances());		
+	}
 
 }

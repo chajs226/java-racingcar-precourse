@@ -24,7 +24,7 @@ class CarTest {
 	public void test_inputNames_without_comma() {
 		//Given
 		String inputNames = "chajs";
-		CarNames carNames = new CarNames(inputNames);		
+		CarNamesList carNames = new CarNamesList(inputNames);		
 		
 		//When
 		nameList = carNames.parsingInputNames(inputNames);
@@ -38,7 +38,7 @@ class CarTest {
 	public void test_inputNames_with_comma() {
 		//Given
 		String inputNames = "chajs,pobi,crong,dian";
-		CarNames carNames = new CarNames(inputNames);		
+		CarNamesList carNames = new CarNamesList(inputNames);		
 		
 		//When
 		nameList = carNames.parsingInputNames(inputNames);
@@ -54,13 +54,12 @@ class CarTest {
 	@Test	
 	public void test_inputNames_more_than_five_letters() {
 		//Given
-		String inputNames = "chajs226";		
+		String inputName = "chajs226";		
 
-		CarNames carNames = new CarNames(inputNames);		
-		nameList = carNames.parsingInputNames(inputNames);
+		CarName carName = new CarName(inputName);
 		
 		//When-Then
-		assertThatThrownBy(() -> carNames.validateInputNames(nameList))
+		assertThatThrownBy(() -> carName.validateName())
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("자동차 이름은 5자 이하만 가능합니다.");
 		
